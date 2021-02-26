@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import CharactersService from '../../services/charactersService';
 import CharacterCard from '../character-card/CharacterCard';
 
@@ -25,4 +26,10 @@ class CharacterList extends Component {
     };
 };
 
-export default CharacterList;
+const mapStateToProps = (state) => {
+    return {
+        characters: state.characters
+    };
+};
+
+export default connect(mapStateToProps, )(CharacterList);
