@@ -1,4 +1,6 @@
-ul {
+.character-list__wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 570px);
     list-style: none;
     li {
         margin-bottom: 25px;

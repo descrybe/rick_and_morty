@@ -10,15 +10,15 @@ class CharacterList extends Component {
         const { charactersService } = this.props;
         const asyncData = charactersService.getAllCharacters();
 
-        asyncData.then(response => 
-            this.props.charactersLoaded(response)
-        );
+        asyncData.then(res => {
+            this.props.charactersLoaded(res.results);
+        });
     }
 
     render() {
         const { characters } = this.props;
         return (
-            <ul>
+            <ul className='character-list__wrapper'>
                 {
                     characters.map(character => {
                         return (

@@ -8,25 +8,9 @@ export default class CharactersService {
     }
     
     async getAllCharacters() {
-        // const allCharacters = await this.getResponse('character');
+        const allCharacters = await this.getResponse('character');
         
-        // return allCharacters;
-        return [
-            {
-                id: 1,
-                name: "Rick Sanchez",
-                species: "Human",
-                gender: "Male",
-                image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-            },
-            {
-                id: 2,
-                name: "Morty Smith",
-                species: "Human",
-                gender: "Male",
-                image: "https://rickandmortyapi.com/api/character/avatar/2.jpeg"
-            }
-        ];
+        return allCharacters;
     };
 
     async getCharacterById() {
