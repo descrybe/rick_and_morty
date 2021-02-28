@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './CharacterCard.scss';
 
 const CharacterCard = ({ character }) => {
-    const { image, name, gender, species } = character;
+    const { id, image, name, gender, species } = character;
     
     return (
         <article className='character-card'>
@@ -11,7 +12,9 @@ const CharacterCard = ({ character }) => {
             </div>
                 <div className='character-card__description'>
                     <div className='character-card__description-section'>
-                        <span className='character-card__description-name'>{name}</span>
+                        <Link to={`/characters/${id}`}>
+                            <span className='character-card__description-name'>{name}</span>
+                        </Link>
                     </div>
                     <div className='character-card__description-section'>
                         <p>Gender:</p>

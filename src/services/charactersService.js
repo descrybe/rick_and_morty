@@ -1,4 +1,5 @@
 export default class CharactersService {
+
     _baseUrl = 'https://rickandmortyapi.com/api/';
 
     async getResponse(url) {
@@ -7,14 +8,16 @@ export default class CharactersService {
         return await response.json();
     }
     
-    async getAllCharacters() {
-        const allCharacters = await this.getResponse('character');
+    async getAllCharactersByPage(page) {
+        const allCharacters = await this.getResponse(`character/?page=${page}`);
         
         return allCharacters;
     };
 
-    async getCharacterById() {
-        return {};
+    async getCharacterById(id) {
+        const allCharacters = await this.getResponse(`character/${id}`);
+        
+        return allCharacters;
     };
 
 };

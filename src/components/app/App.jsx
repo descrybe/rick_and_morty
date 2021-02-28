@@ -19,8 +19,11 @@ const App = () => {
                     component={ HomePage }
                     exact />
                 <Route 
-                    path='/characters' 
-                    component={ CharacterPage }/>
+                    path='/characters/:id' 
+                    render={({ match }) => {
+                        const { id } = match.params;
+                        return <CharacterPage characterId={id}/>
+                    }}/>
             </Switch>
         </div>
     );

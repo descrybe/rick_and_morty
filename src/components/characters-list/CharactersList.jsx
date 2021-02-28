@@ -1,22 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import CharacterCard from '../character-card/CharacterCard';
+
+import { charactersLoaded } from '../../actions';
 import withCharactersService from '../hoc/with-characters-service';
+import CharacterCard from '../character-card/CharacterCard';
+import Spinner from '../spinner/Spinner';
 
 import './CharactersList.scss';
 class CharacterList extends Component {
 
     componentDidMount() {
         const { charactersService } = this.props;
-        const asyncData = charactersService.getAllCharacters();
 
-        asyncData.then(res => {
-            this.props.charactersLoaded(res.results);
-        });
-    }
+        charactersService
+            .getAllCharactersByPage(2)
+            .then(res => {
+                this.props.charactersLoaded(res.results);
+            });
+    };
 
     render() {
-        const { characters } = this.props;
+        const { characters, loading } = this.props;
+        
+        if (loading) {
+            return <Spinner />
+        }
+
         return (
             <ul className='character-list__wrapper'>
                 {
@@ -33,22 +42,11 @@ class CharacterList extends Component {
     };
 };
 
-const mapStateToProps = (state) => {
-    return {
-        characters: state.characters
-    };
+const mapStateToProps = ({ characters, loading }) => {
+    return { characters, loading };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        charactersLoaded: (newCharacters) => {
-            dispatch({
-                type: 'CHARACTERS_LOADED',
-                payload: newCharacters
-            })
-        }
-    };
-};
+const mapDispatchToProps = { charactersLoaded };
 
 export default withCharactersService()(
     connect(mapStateToProps, mapDispatchToProps)(CharacterList)
