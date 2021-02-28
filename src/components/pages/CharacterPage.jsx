@@ -5,6 +5,8 @@ import { singleCharacterLoaded } from '../../actions';
 import withCharactersService from '../hoc/with-characters-service';
 import Spinner from '../spinner/Spinner';
 
+import './CharacterPage.scss';
+
 class CharacterPage extends Component {
     componentDidMount() {
         const { characterId, charactersService } = this.props;
@@ -13,32 +15,51 @@ class CharacterPage extends Component {
             .getCharacterById(characterId)
             .then(res => {
                 this.props.singleCharacterLoaded(res);
+                console.log(res);
             });
     };
 
     render() {
         const { singleCharacter, loading } = this.props;
-        const { name, image, gender, species } = singleCharacter;
+        const { name, image, gender, species, 
+            type, status, location } = singleCharacter;
 
         if (loading) {
             return <Spinner />
         }
 
         return (
-            <div>
-                <div className='character-page__avatar'>
-                    <img src={image} alt={name}/>
-                </div>
-                <div className='character-page__description-section'>
-                    <span className='character-page__description-name'>{name}</span>
-                </div>
-                <div className='character-page__description-section'>
-                    <p>Gender:</p>
-                    <span>{gender}</span>
-                </div>
-                <div className='character-page__description-section'>
-                    <p>Species:</p>
-                    <span>{species}</span>
+            <div className='character-page__wrapper'>
+                <header>
+                    <div className='character-page__avatar'>
+                        <img src={image} alt={name}/>
+                    </div>
+                    
+                    <div className='character-page__description-section'>
+                        <span className='character-page__description-name'>{name}</span>
+                    </div>
+                </header>
+                <div className='character-page__description'>
+                    <div className='character-page__description-section'>
+                        <p>Status:</p>
+                        <span>{status}</span>
+                    </div>
+                    <div className='character-page__description-section'>
+                        <p>Gender:</p>
+                        <span>{gender}</span>
+                    </div>
+                    <div className='character-page__description-section'>
+                        <p>Species:</p>
+                        <span>{species}</span>
+                    </div>
+                    <div className='character-page__description-section'>
+                        <p>Type:</p>
+                        <span>{type}</span>
+                    </div>
+                    <div className='character-page__description-section'>
+                        <p>Last known location:</p>
+                        <span>{location.name}</span>
+                    </div>
                 </div>
             </div>
         );

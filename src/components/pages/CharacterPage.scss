@@ -1,0 +1,12 @@
+.character-page {
+    &__wrapper {
+        header {
+            display: flex;
+
+        }
+    }
+
+    &__description {
+        display: grid;
+    }
+}
