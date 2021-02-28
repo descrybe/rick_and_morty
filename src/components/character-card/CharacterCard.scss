@@ -33,6 +33,10 @@
 
         &-name {
             font-size: 1.6rem;
+            &:hover {
+                color: cadetblue;
+                cursor: pointer;
+            }
         }
 
         a {
