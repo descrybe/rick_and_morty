@@ -14,4 +14,4 @@ const charactersLoaded = (newCharacters) => {
 export {
     charactersLoading,
     charactersLoaded,
-}
+};

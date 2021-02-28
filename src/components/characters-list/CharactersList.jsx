@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import CharactersService from '../../services/charactersService';
 import CharacterCard from '../character-card/CharacterCard';
+import withCharactersService from '../hoc/with-characters-service';
 
 import './CharactersList.scss';
-
 class CharacterList extends Component {
 
+    componentDidMount() {
+        const { charactersService } = this.props;
+        const asyncData = charactersService.getAllCharacters();
+
+        asyncData.then(response => 
+            this.props.charactersLoaded(response)
+        );
+    }
 
     render() {
         const { characters } = this.props;
@@ -32,4 +39,17 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, )(CharacterList);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        charactersLoaded: (newCharacters) => {
+            dispatch({
+                type: 'CHARACTERS_LOADED',
+                payload: newCharacters
+            })
+        }
+    };
+};
+
+export default withCharactersService()(
+    connect(mapStateToProps, mapDispatchToProps)(CharacterList)
+);
