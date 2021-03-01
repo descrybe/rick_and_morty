@@ -22,7 +22,10 @@ class CharacterPage extends Component {
     render() {
         const { singleCharacter, loading } = this.props;
         const { name, image, gender, species, 
-            type, status, location } = singleCharacter;
+            type, status, episode } = singleCharacter;
+        
+        console.log('episode', episode);
+        // данные не загружаются, нужно подождать ещё вложенные поля
 
         if (loading) {
             return <Spinner />
@@ -55,10 +58,6 @@ class CharacterPage extends Component {
                     <div className='character-page__description-section'>
                         <p>Type:</p>
                         <span>{type}</span>
-                    </div>
-                    <div className='character-page__description-section'>
-                        <p>Last known location:</p>
-                        <span>{location.name}</span>
                     </div>
                 </div>
             </div>

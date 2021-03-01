@@ -1,6 +1,18 @@
-const charactersLoading = () => {
+const charactersRequested = () => {
     return {
-        type: 'CHARACTERS_LOADING'
+        type: 'CHARACTERS_REQUESTED'
+    };
+};
+
+const singleCharacterRequested = () => {
+    return {
+        type: 'SINGLE_CHARACTER_REQUESTED'
+    };
+};
+
+const charactersError = () => {
+    return {
+        type: 'CHARACTERS_ERROR'
     };
 };
 
@@ -19,7 +31,9 @@ const singleCharacterLoaded = (newCharacter) => {
 };
 
 export {
-    charactersLoading,
+    charactersRequested,
+    singleCharacterRequested,
     charactersLoaded,
-    singleCharacterLoaded
+    singleCharacterLoaded,
+    charactersError
 };
