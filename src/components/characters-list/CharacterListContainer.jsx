@@ -7,8 +7,25 @@ import CharacterCard from '../character-card/CharacterCard';
 import Spinner from '../spinner/Spinner';
 import ErrorIndicator from '../error-indicator/ErrorIndicator';
 
-import './CharactersList.scss';
-class CharacterList extends Component {
+import './CharacterListContainer.scss';
+
+const CharacterList = ({ characters }) => {
+    return (
+        <ul className='character-list__wrapper'>
+            {
+                characters.map(character => {
+                    return (
+                        <li key={character.id}>
+                            <CharacterCard character={character}/>
+                        </li>
+                    )
+                })
+            }
+        </ul>
+    )
+};
+
+class CharacterListContainer extends Component {
     componentDidMount() {
         this.props.fetchCharacters();
     };
@@ -23,19 +40,7 @@ class CharacterList extends Component {
             return <ErrorIndicator />
         }
 
-        return (
-            <ul className='character-list__wrapper'>
-                {
-                    characters.map(character => {
-                        return (
-                            <li key={character.id}>
-                                <CharacterCard character={character}/>
-                            </li>
-                        )
-                    })
-                }
-            </ul>
-        )
+        return <CharacterList characters={characters}/>
     };
 };
 
@@ -50,5 +55,5 @@ const mapDispatchToProps = (dispatch, { charactersService, currentPage }) => {
 }
 
 export default withCharactersService()(
-    connect(mapStateToProps, mapDispatchToProps)(CharacterList)
+    connect(mapStateToProps, mapDispatchToProps)(CharacterListContainer)
 );

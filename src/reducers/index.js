@@ -7,6 +7,8 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case 'FETCH_CHARACTERS_REQUEST':
+            return { ...state };
         case 'FETCH_CHARACTERS_SUCCESS':
             return {
                 ...state,
@@ -19,8 +21,6 @@ const reducer = (state = initialState, action) => {
                 loading: false, 
                 error: action.payload,
             };
-        case 'FETCH_CHARACTERS_REQUEST':
-            return { ...state };
         case 'FETCH_SINGLE_CHARACTER_REQUEST':
             return { ...state };
         case 'FETCH_SINGLE_CHARACTER_SUCCESS':
