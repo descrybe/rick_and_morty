@@ -1,12 +1,57 @@
 .character-page {
-    &__wrapper {
+    &__wrapper {        
         header {
             display: flex;
+            flex-direction: column;
+        }
+    }
 
+    &__avatar {
+        img {
+            max-width: 250px;
+            max-height: 250px;
         }
     }
 
     &__description {
-        display: grid;
+        min-width: 250px;
+        background-color: #000;
+        color: #fff;
+        &-name {
+            color: #fff;
+            font-size: 2.5rem;
+        }
+
+        &-section {
+            td {
+                font-size: 1.5rem;
+                padding-right: 20px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 700px) {      
+    .character-page {
+        &__wrapper {
+            header {
+                align-items: center;
+            }
+        }
+
+        &__avatar {
+            img {
+                max-width: 500px;
+                max-height: 500px;
+            }
+        }
+
+        &__description {
+            max-width: 500px;
+
+            &-name {
+                font-size: 1.5rem;
+            }
+        }
     }
 }

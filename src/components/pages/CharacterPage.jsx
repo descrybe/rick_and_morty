@@ -42,24 +42,29 @@ class CharacterPage extends Component {
                         <span className='character-page__description-name'>{name}</span>
                     </div>
                 </header>
-                <div className='character-page__description'>
-                    <div className='character-page__description-section'>
-                        <p>Status:</p>
-                        <span>{status}</span>
-                    </div>
-                    <div className='character-page__description-section'>
-                        <p>Gender:</p>
-                        <span>{gender}</span>
-                    </div>
-                    <div className='character-page__description-section'>
-                        <p>Species:</p>
-                        <span>{species}</span>
-                    </div>
-                    <div className='character-page__description-section'>
-                        <p>Type:</p>
-                        <span>{type}</span>
-                    </div>
-                </div>
+                <table className='character-page__description'>
+                        <tbody>
+                            <tr className='character-page__description-section'>
+                                <td>Status:</td>
+                                <td>{status}</td>
+                            </tr>
+                            <tr className='character-page__description-section'>
+                                <td>Gender:</td>
+                                <td>{gender}</td>
+                            </tr>
+                            <tr className='character-page__description-section'>
+                                <td>Species:</td>
+                                <td>{species}</td>
+                            </tr>
+                            {
+                                type.length ? 
+                                <tr className='character-page__description-section'>
+                                    <td>Type:</td>
+                                    <td>{type}</td>
+                                </tr> : null
+                            }
+                        </tbody>
+                </table>
             </div>
         );
     }
