@@ -9,7 +9,6 @@ import ErrorIndicator from '../error-indicator/ErrorIndicator';
 
 import './CharactersList.scss';
 class CharacterList extends Component {
-
     componentDidMount() {
         this.props.fetchCharacters();
     };
@@ -20,7 +19,6 @@ class CharacterList extends Component {
         if (loading) {
             return <Spinner />
         }
-
         if (error) {
             return <ErrorIndicator />
         }
@@ -48,10 +46,10 @@ const mapStateToProps = ({ characters, loading, error }) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         fetchCharacters: () => {
-            const { charactersService } = ownProps;
+            const { charactersService, currentPage } = ownProps;
             dispatch(charactersRequested());
             charactersService
-                .getAllCharactersByPage(1)
+                .getAllCharactersByPage(currentPage)
                 .then(firstRes => {
                     dispatch(charactersLoaded(firstRes.results));
                 })

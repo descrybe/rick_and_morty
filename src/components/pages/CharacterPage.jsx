@@ -9,6 +9,7 @@ import './CharacterPage.scss';
 
 class CharacterPage extends Component {
     componentDidMount() {
+        console.log(this.props);
         const { characterId, charactersService } = this.props;
 
         charactersService
@@ -22,7 +23,7 @@ class CharacterPage extends Component {
     render() {
         const { singleCharacter, loading } = this.props;
         const { name, image, gender, species, 
-            type, status, episode } = singleCharacter;
+            status, episode } = singleCharacter;
         
         console.log('episode', episode);
         // данные не загружаются, нужно подождать ещё вложенные поля
@@ -56,13 +57,6 @@ class CharacterPage extends Component {
                                 <td>Species:</td>
                                 <td>{species}</td>
                             </tr>
-                            {
-                                type.length ? 
-                                <tr className='character-page__description-section'>
-                                    <td>Type:</td>
-                                    <td>{type}</td>
-                                </tr> : null
-                            }
                         </tbody>
                 </table>
             </div>

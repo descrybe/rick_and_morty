@@ -10,13 +10,16 @@ import './App.scss';
 const App = () => {
     return (
         <div>
-            <Link to='/'>                
+            <Link to='/page/1'>                
                 <Header />
             </Link>
             <Switch>
                 <Route 
-                    path='/' 
-                    component={ HomePage }
+                    path='/page/:currentPage' 
+                    render={({ match }) => {
+                        const { currentPage } = match.params;
+                        return <HomePage currentPage={currentPage}/>
+                    }}
                     exact />
                 <Route 
                     path='/characters/:id' 

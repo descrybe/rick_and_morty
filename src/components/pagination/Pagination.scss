@@ -1,0 +1,22 @@
+.pagination {
+    display: flex;
+    &__next-button, &__prev-button {
+        width: 25px;
+        height: 25px;
+        background-color: transparent;        
+        margin: 0 20px;
+        cursor: pointer;
+    }
+
+    &__next-button {
+        &:after {
+            content: '>';
+        }
+    }
+
+    &__prev-button {
+        &:before {
+            content: '<';
+        }
+    }
+}
