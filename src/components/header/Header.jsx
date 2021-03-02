@@ -1,10 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import './Header.scss';
 
 const Header = () => {
     return (
         <header className='app-header'>
-            <h1>Rich and Morty redux app</h1>
+            <Link to='/characters?page=1'>          
+                <span>Rich and Morty redux app</span>
+            </Link>
         </header>
     );
 };
