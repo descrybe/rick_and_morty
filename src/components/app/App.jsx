@@ -10,19 +10,21 @@ import './App.scss';
 const App = () => {
     return (
         <div>
-            <Link to='/page/1'>                
+            <Link to='/characters?page=1'>     
                 <Header />
             </Link>
             <Switch>
                 <Route 
-                    path='/page/:currentPage' 
+                    path='/characters'
                     render={({ match }) => {
+                        console.log(match);
                         const { currentPage } = match.params;
                         return <HomePage currentPage={currentPage}/>
                     }}
-                    exact />
+                    />
                 <Route 
-                    path='/characters/:id' 
+                    exact
+                    path='/character/:id' 
                     render={({ match }) => {
                         const { id } = match.params;
                         return <CharacterPage characterId={id}/>

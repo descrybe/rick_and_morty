@@ -7,28 +7,34 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'CHARACTERS_LOADED':
+        case 'FETCH_CHARACTERS_SUCCESS':
             return {
                 ...state,
                 characters: action.payload,
                 loading: false,
             };
-        case 'SINGLE_CHARACTER_LOADED':
+        case 'FETCH_CHARACTERS_ERROR':
+            return { 
+                ...state,
+                loading: false, 
+                error: action.payload,
+            };
+        case 'FETCH_CHARACTERS_REQUEST':
+            return { ...state };
+        case 'FETCH_SINGLE_CHARACTER_REQUEST':
+            return { ...state };
+        case 'FETCH_SINGLE_CHARACTER_SUCCESS':
             return {
                 ...state,
                 singleCharacter: action.payload,
                 loading: false,
             };
-        case 'SINGLE_CHARACTER_ERROR':
+        case 'FETCH_SINGLE_CHARACTER_ERROR':
             return {
                 ...state,
                 loading: false,
                 error: action.payload,
             };
-        case 'SINGLE_CHARACTER_REQUESTED':
-            return { ...state };
-        case 'CHARACTERS_REQUESTED':
-            return { ...state };
         default:
             return state;
     }

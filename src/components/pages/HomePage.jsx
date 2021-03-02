@@ -5,11 +5,10 @@ import CharacterList from '../characters-list/CharactersList';
 const HomePage = ({ currentPage }) => {
     return (
         <div>
-            <Pagination />
+            <Pagination currentPage={currentPage}/>
             <div>
                 <CharacterList currentPage={currentPage}/>
             </div>
-            <Pagination />
         </div>
     );
 };

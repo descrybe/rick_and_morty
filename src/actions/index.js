@@ -1,39 +1,49 @@
 const charactersRequested = () => {
     return {
-        type: 'CHARACTERS_REQUESTED'
+        type: 'FETCH_CHARACTERS_REQUEST'
     };
 };
 
 const singleCharacterRequested = () => {
     return {
-        type: 'SINGLE_CHARACTER_REQUESTED'
+        type: 'FETCH_SINGLE_CHARACTER_REQUEST'
     };
 };
 
 const charactersError = () => {
     return {
-        type: 'CHARACTERS_ERROR'
+        type: 'FETCH_CHARACTERS_ERROR'
     };
 };
 
 const charactersLoaded = (newCharacters) => {
     return {
-        type: 'CHARACTERS_LOADED',
+        type: 'FETCH_CHARACTERS_SUCCESS',
         payload: newCharacters
     };
 };
 
 const singleCharacterLoaded = (newCharacter) => {
     return {
-        type: 'SINGLE_CHARACTER_LOADED',
+        type: 'FETCH_SINGLE_CHARACTER_SUCCESS',
         payload: newCharacter
     };
 };
 
+const fetchCharacters = (dispatch, charactersService, currentPage) => () => {
+    dispatch(charactersRequested());
+    charactersService
+        .getAllCharactersByPage(currentPage)
+        .then(firstRes => {
+            dispatch(charactersLoaded(firstRes.results));
+        })
+        .catch((err) => 
+            dispatch(charactersError(err))
+        );
+};
+
 export {
-    charactersRequested,
     singleCharacterRequested,
-    charactersLoaded,
     singleCharacterLoaded,
-    charactersError
+    fetchCharacters
 };

@@ -9,15 +9,7 @@ import './CharacterPage.scss';
 
 class CharacterPage extends Component {
     componentDidMount() {
-        console.log(this.props);
-        const { characterId, charactersService } = this.props;
-
-        charactersService
-            .getCharacterById(characterId)
-            .then(res => {
-                this.props.singleCharacterLoaded(res);
-                console.log(res);
-            });
+        this.props.fetchSingleCharacter();
     };
 
     render() {
@@ -25,7 +17,7 @@ class CharacterPage extends Component {
         const { name, image, gender, species, 
             status, episode } = singleCharacter;
         
-        console.log('episode', episode);
+        // console.log('episode', episode);
         // данные не загружаются, нужно подождать ещё вложенные поля
 
         if (loading) {
@@ -68,7 +60,20 @@ const mapStateToProps = ({ singleCharacter, loading }) => {
     return { singleCharacter, loading };
 };
 
-const mapDispatchToProps = { singleCharacterLoaded };
+const mapDispatchToProps = (dispatch, ownProps) => { 
+    return {
+        fetchSingleCharacter: () => {
+            const { characterId, charactersService } = ownProps;
+
+            charactersService
+                .getCharacterById(characterId)
+                .then(res => {
+                    console.log(res);
+                    dispatch(singleCharacterLoaded(res));
+                });
+        }
+    }
+};
 
 export default withCharactersService()(
     connect(mapStateToProps, mapDispatchToProps)(CharacterPage)

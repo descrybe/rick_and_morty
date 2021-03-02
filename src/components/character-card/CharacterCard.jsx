@@ -12,7 +12,7 @@ const CharacterCard = ({ character }) => {
             </div>
                 <div className='character-card__description'>
                     <div className='character-card__description-section'>
-                        <Link to={`/characters/${id}`}>
+                        <Link to={`/character/${id}`}>
                             <span className='character-card__description-name'>{name}</span>
                         </Link>
                     </div>

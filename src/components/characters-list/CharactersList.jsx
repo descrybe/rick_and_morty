@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { charactersLoaded, charactersRequested, charactersError } from '../../actions';
+import { fetchCharacters } from '../../actions';
 import withCharactersService from '../hoc/with-characters-service';
 import CharacterCard from '../character-card/CharacterCard';
 import Spinner from '../spinner/Spinner';
@@ -43,20 +43,9 @@ const mapStateToProps = ({ characters, loading, error }) => {
     return { characters, loading, error };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch, { charactersService, currentPage }) => {    
     return {
-        fetchCharacters: () => {
-            const { charactersService, currentPage } = ownProps;
-            dispatch(charactersRequested());
-            charactersService
-                .getAllCharactersByPage(currentPage)
-                .then(firstRes => {
-                    dispatch(charactersLoaded(firstRes.results));
-                })
-                .catch((err) => 
-                    dispatch(charactersError(err))
-                );
-        }
+        fetchCharacters: fetchCharacters(dispatch, charactersService, currentPage)
     }
 }
 
