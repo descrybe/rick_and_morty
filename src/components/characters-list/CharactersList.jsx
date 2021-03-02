@@ -11,20 +11,7 @@ import './CharactersList.scss';
 class CharacterList extends Component {
 
     componentDidMount() {
-        const { charactersService, charactersLoaded, 
-            charactersRequested, charactersError } = this.props;
-        charactersRequested();
-        charactersService
-            .getAllCharactersByPage(1)
-            .then(firstRes => {
-                charactersService
-                    .getAllCharactersByPage(2)
-                    .then(secondRes => {
-                        const newRes = [...firstRes.results, ...secondRes.results]
-                        charactersLoaded(newRes);
-                    });
-            })
-            .catch((err) => charactersError(err));
+        this.props.fetchCharacters();
     };
 
     render() {
@@ -58,11 +45,22 @@ const mapStateToProps = ({ characters, loading, error }) => {
     return { characters, loading, error };
 };
 
-const mapDispatchToProps = { 
-    charactersLoaded,
-    charactersRequested,
-    charactersError
-};
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        fetchCharacters: () => {
+            const { charactersService } = ownProps;
+            dispatch(charactersRequested());
+            charactersService
+                .getAllCharactersByPage(1)
+                .then(firstRes => {
+                    dispatch(charactersLoaded(firstRes.results));
+                })
+                .catch((err) => 
+                    dispatch(charactersError(err))
+                );
+        }
+    }
+}
 
 export default withCharactersService()(
     connect(mapStateToProps, mapDispatchToProps)(CharacterList)
